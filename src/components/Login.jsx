@@ -8,6 +8,7 @@ import { BASE_URL } from "../utilis/constants";
 const Login = () => {
   const [emailId, setEmailId] = useState("abhay123@gmail.com");
   const [password, setPassword] = useState("Abhay@123");
+  const [error , setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ const Login = () => {
       dispatch(addUser(res.data));
        return navigate("/");
     } catch (err) {
+      setError(err?.response?.data  ||  "something went wrong")
       console.error(err);
     }
   };
@@ -55,7 +57,8 @@ const Login = () => {
               />
             </fieldset>
           </div>
-          <div className="card-actions justify-center">
+            <p className="text-red-500">{error}</p>
+          <div className="card-actions justify-center ">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
             </button>

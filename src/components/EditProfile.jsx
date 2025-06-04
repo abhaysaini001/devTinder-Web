@@ -2,7 +2,7 @@ import { useState } from "react";
 import UserCard from "./UserCard";
 import { BASE_URL } from "../utilis/constants";
 import axios from "axios";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../utilis/userSlice_temp";
 
 const EditProfile = ({ user }) => {
@@ -14,7 +14,7 @@ const EditProfile = ({ user }) => {
   const [about, setAbout] = useState(user.about);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const [showToast, setShowToast]= useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const saveProfile = async () => {
     setError("");
@@ -26,9 +26,9 @@ const EditProfile = ({ user }) => {
       );
       dispatch(addUser(res?.data?.data));
       setShowToast(true);
-      setTimeout(()=>{
-        setShowToast(false)
-      },3000)
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     } catch (err) {
       setError(err.response.data);
     }
@@ -88,12 +88,16 @@ const EditProfile = ({ user }) => {
               <div>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Gender</legend>
-                  <input
-                    type="text"
+                  <select
                     value={gender}
-                    className="input"
                     onChange={(e) => setGender(e.target.value)}
-                  />
+                    className="select select-bordered w-full"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Others</option>
+                  </select>
                 </fieldset>
               </div>
               <div>
@@ -121,11 +125,13 @@ const EditProfile = ({ user }) => {
           user={{ firstName, lastName, photoUrl, gender, about, age }}
         />
       </div>
-      { showToast && <div className="toast toast-top toast-center">
-        <div className="alert alert-success">
-          <span>Profile saved successfully.</span>
+      {showToast && (
+        <div className="toast toast-top toast-center">
+          <div className="alert alert-success">
+            <span>Profile saved successfully.</span>
+          </div>
         </div>
-      </div>}
+      )}
     </>
   );
 };

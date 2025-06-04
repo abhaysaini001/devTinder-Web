@@ -28,7 +28,8 @@ const NavBar = () => {
       </div>
       {user && (
         <div className=" flex justify-center">
-          <div className="form-control">Welcome {user.firstName}</div>
+          <div className="form-control flex justify-center self-center">
+            <span >Welcome {user.firstName}</span></div>
           <div className="dropdown dropdown-end mx-7 flex items-center justify-center gap-4 mr-4">
             <div
               tabIndex={0}
@@ -49,7 +50,7 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections">Connections</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

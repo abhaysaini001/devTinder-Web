@@ -4,16 +4,18 @@ import { BASE_URL } from "../utilis/constants";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utilis/userSlice_temp";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user }) => {
   const [firstName, setfirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [age, setAge] = useState(user.age);
-  const [gender, setGender] = useState(user.gender);
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showToast, setShowToast] = useState(false);
 
   const saveProfile = async () => {
@@ -28,7 +30,8 @@ const EditProfile = ({ user }) => {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
-      }, 3000);
+        navigate("/");
+      }, 1000);
     } catch (err) {
       setError(err.response.data);
     }
@@ -94,7 +97,7 @@ const EditProfile = ({ user }) => {
                     className="select select-bordered w-full"
                   >
                     <option value="">Select Gender</option>
-                    <option value="male">Male</option>
+                    <option value="Male">Male</option>
                     <option value="female">Female</option>
                     <option value="non-binary">Others</option>
                   </select>

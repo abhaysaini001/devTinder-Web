@@ -29,7 +29,7 @@ const Connections = () => {
   if (!connections) {
   return (
     <div className="flex flex-col justify-center items-center h-64 gap-3">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-primary"></div>
+      <div className="animate-spin  h-12 w-12 border-b-4 border-primary"></div>
       <p className="text-primary text-lg font-medium">Fetching your connections...</p>
     </div>
   );
